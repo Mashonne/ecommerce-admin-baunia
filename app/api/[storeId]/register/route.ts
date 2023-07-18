@@ -15,7 +15,6 @@ export async function OPTIONS() {
 
 export async function POST(
   req: Request,
-  { params }: { params: { storeId: string } }
   ) {
   try {
     const body = await req.json();
@@ -32,7 +31,6 @@ export async function POST(
         email,
         name,
         hashedPassword,
-        storeId: params.storeId,
       },
     });
 

@@ -21,7 +21,6 @@ model Store {
   colors     Color[]     @relation("StoreToColor")
   products   Product[]   @relation("StoreToProduct")
   orders     Order[]     @relation("StoreToOrder")
-  users      User[]      @relation("UsersOfStore")
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
@@ -143,34 +142,30 @@ model OrderItem {
 
 model User {
   id             String    @id @default(uuid())
-  storeId        String
-  store          Store     @relation("UsersOfStore", fields: [storeId], references: [id])
   name           String?
-  email          String?
-  emailVerified  String?
+  email          String?   @unique
+  emailVerified  DateTime?
   image          String?
   hashedPassword String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-  accounts       Account[] @relation("AccountToUser")
-
-  @@index([storeId])
+  accounts       Account[]
 }
 
 model Account {
   id                String  @id @default(uuid())
   userId            String
-  user              User    @relation("AccountToUser", fields: [userId], references: [id])
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.VarChar(255)
-  access_token      String? @db.VarChar(255)
-  expires_at        Int?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   token_type        String?
   scope             String?
-  id_token          String? @db.VarChar(255)
+  id_token          String? @db.Text
   session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@index([userId])
