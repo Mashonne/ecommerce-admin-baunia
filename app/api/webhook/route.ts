@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     for (const product of products) {
       await prismadb.product.update({
         where: {
-          id: product.id,
+          id: product.productId,
         },
         data: {
           isArchived: true,
