@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 
 import { stripe } from "@/lib/stripe";
 import prismadb from "@/lib/prismadb";
-
+import { number } from "zod";
+ 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -18,7 +19,9 @@ export async function POST(
   req: Request,
   { params }: { params: { storeId: string } }
 ) {
-  const { productIds } = await req.json();
+  const items = await req.json();
+
+  const productIds = items.map((item: { id: string; }) => item.id)
 
   if (!productIds || productIds.length === 0) {
     return new NextResponse("Product ids are required", { status: 400 });
@@ -32,11 +35,17 @@ export async function POST(
     }
   });
 
+  const getQuantity = (id: string) => {
+    const qty = items.filter((product: { id: string, cartQuantity: number }) => product.id === id ? product.cartQuantity : 1);
+    const numberedQty = Number(qty)
+    return numberedQty
+  }
+
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   products.forEach((product) => {
     line_items.push({
-      quantity: 1,
+      quantity: getQuantity(product.id),
       price_data: {
         currency: 'USD',
         product_data: {
