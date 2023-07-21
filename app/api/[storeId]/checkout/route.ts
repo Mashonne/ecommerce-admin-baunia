@@ -33,11 +33,19 @@ export async function POST(
     },
   });
 
+  const getQty = (id: string) => {
+    return Number(
+      items.filter((item: { id: string; cartQuantity: number }) =>
+        item.id === id ? item.cartQuantity : 1
+      )
+    );
+  };
+
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   products.forEach((product) => {
     line_items.push({
-      quantity: 1,
+      quantity: getQty(product.id),
       price_data: {
         currency: "USD",
         product_data: {
