@@ -50,12 +50,12 @@ export async function POST(req: Request) {
       },
     });
 
-    const productIds = order.orderItems.map((orderItem) => orderItem.productId);
+    const products = order.orderItems.map((orderItem) => orderItem);
 
-    for (const id of productIds) {
+    for (const product of products) {
       await prismadb.product.update({
         where: {
-          id: id,
+          id: product.id,
         },
         data: {
           isArchived: true,
