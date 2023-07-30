@@ -36,8 +36,13 @@ export async function POST(
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   products.forEach((product) => {
+    const productDetails = items.find(
+      (item: { productId: string; cartQuantity: number }) =>
+        item.productId === product.id
+    );
+
     line_items.push({
-      quantity: 1,
+      quantity: productDetails?.cartQuantity,
       price_data: {
         currency: "USD",
         product_data: {
