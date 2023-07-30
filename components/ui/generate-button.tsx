@@ -19,19 +19,20 @@ const GenerateButton: React.FC<GenerateButtonProps>  = ({
     name
 }) => {
     return ( 
-        <div className="flex gap-3 py-3 px-4  items-center border-[1px] rounded-md">
+        <div className="flex gap-4 py-3 px-4  items-center border-[1px] rounded-md">
             <Icon 
                 size={45}
                 className="border-[1px] rounded-md p-1"
             />
-             <div className="flex flex-1 flex-col items-center justify-between">
+             <div className="flex flex-1 flex-col gap-1 items-center justify-between">
                 <span className="font-semibold">
                     {name}
                 </span>
                     <button 
                         onClick={() => onClick(path, storeId)}
                         className="
-                            w-full 
+                            sm:w-full
+                            w-5/6
                             text-center 
                             text-sm
                             bg-black 
