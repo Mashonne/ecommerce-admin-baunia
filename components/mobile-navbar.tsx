@@ -97,7 +97,7 @@ const MobileNavbar = () => {
               leaveFrom="opacity-100 w-full"
               leaveTo="opacity-0 w-0"
             >
-              <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs gap-1 flex-col overflow-y-auto bg-white dark:bg-zinc-950 py-4 pb-6 shadow-xl">
+              <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs gap-1 flex-col overflow-y-auto bg-white dark:bg-slate-950 py-4 pb-6 shadow-xl">
                 {/* Close Button */}
                 <div className="flex items-center justify-end px-4">
                   <IconButton icon={<X size={15} />} onClick={onClose} />
@@ -111,8 +111,8 @@ const MobileNavbar = () => {
                         key={route.href}
                         href={route.href}
                         className={cn(
-                          "px-5 py-4 border-b-[1px] bg-white text-black dark:text-white hover:bg-neutral-300 transition-colors",
-                          route.acitve ? "bg-black dark:bg-white text-white dark:text-zinc-950" : ""
+                          "px-5 py-4 border-b-[1px] bg-white dark:bg-slate-950 text-black dark:text-white hover:bg-neutral-300 transition-colors",
+                          route.acitve ? "bg-black dark:bg-white text-white dark:text-slate-950" : ""
                         )}
                       >
                         {route.label}
@@ -131,7 +131,7 @@ const MobileNavbar = () => {
                       cursor-pointer
                       "
                     >
-                      <div className="bg-black dark:bg-white dark:zinc-950 rounded-full hover:bg-neutral-400 px-4 py-1 text-white">
+                      <div className="bg-black dark:bg-white dark:slate-950 rounded-full hover:bg-neutral-400 px-4 py-1 text-white">
                         <SignOutButton />
                       </div>
                       <UserButton />
