@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useParams, usePathname } from "next/navigation";
 import { SignOutButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 
 
 import { cn } from "@/lib/utils";
@@ -124,19 +125,19 @@ const MobileNavbar = () => {
                   <div>
                       <div                 
                       className="
-                      px-5
                       mx-3 
-                      py-2
-                      gap-3
-                      w-1/3  
-                      bg-black
-                      rounded-full
-                      text-white
+                      flex
+                      px-2
+                      items-center
+                      justify-between
+                      gap-3                    
                       cursor-pointer
-                      hover:bg-neutral-400
                       "
                       >
+                        <div className="bg-black rounded-full hover:bg-neutral-400 px-4 py-1 text-white">
                           <SignOutButton/>
+                       </div>
+                          <UserButton />
                       </div>          
                 </div>
                 </div>
