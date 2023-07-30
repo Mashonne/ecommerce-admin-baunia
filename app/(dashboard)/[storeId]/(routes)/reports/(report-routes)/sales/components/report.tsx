@@ -1,5 +1,6 @@
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { OrderTable } from "../page";
+import { formatter } from "@/lib/utils";
 
 // Define your PDF document component
 const styles = StyleSheet.create({
@@ -22,6 +23,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColHeader: {
+    width: "20%",
+    border: "1px solid #000000",
+    backgroundColor: "#F1F9F7",
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+  tableTotalHeader: {
+    width: "80%",
+    border: "1px solid #000000",
+    backgroundColor: "#F1F9F7",
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+  tableTotalAmount: {
     width: "20%",
     border: "1px solid #000000",
     backgroundColor: "#F1F9F7",
@@ -73,7 +88,6 @@ const Report: React.FC<ReportProps> = ({ data }) => (
             <Text style={styles.tableCellHeader}>Order Total</Text>
           </View>
         </View>
-        {data.length === 0 && <Text>No data.</Text>}
         {data.map((item) => (
           <View key={item.id} style={styles.tableRow}>
             <View style={styles.tableCol}>
@@ -95,6 +109,21 @@ const Report: React.FC<ReportProps> = ({ data }) => (
         ))}
 
         {/* More rows as per your data */}
+
+        <View style={styles.tableRow}>
+          <View style={styles.tableTotalHeader}>
+            <Text style={styles.tableCellHeader}>Total</Text>
+          </View>
+          <View style={styles.tableTotalAmount}>
+            <Text style={styles.tableCellHeader}>
+              {formatter.format(
+                data.reduce((total, item) => {
+                  return total + Number(item.totalPriceNumber);
+                }, 0)
+              )}
+            </Text>
+          </View>
+        </View>
       </View>
     </Page>
   </Document>

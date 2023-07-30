@@ -10,6 +10,7 @@ export type OrderTable = {
   address: string,
   totalPrice: string,
   products: string,
+  totalPriceNumber: number
 };
 
 const SalesReport = async ({
@@ -33,7 +34,7 @@ const SalesReport = async ({
         createdAt: "desc",
       },
     });
-
+ 
     const formattedOrders: OrderTable[] = orders.map((item) => ({
       id: item.id,
       name: item.customerName,
@@ -43,6 +44,9 @@ const SalesReport = async ({
       totalPrice: formatter.format(item.orderItems.reduce((total, item) => {
         return total + Number(item.product.price)
       }, 0)),
+      totalPriceNumber: item.orderItems.reduce((total, item) => {
+        return total + Number(item.product.price)
+      }, 0)
     }));
 
     return ( 
