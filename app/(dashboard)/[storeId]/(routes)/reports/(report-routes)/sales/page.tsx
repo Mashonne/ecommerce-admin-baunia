@@ -42,10 +42,10 @@ const SalesReport = async ({
       address: item.address,
       products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
       totalPrice: formatter.format(item.orderItems.reduce((total, item) => {
-        return total + Number(item.product.price)
+        return total + Number(item.product.price)*Number(item.quantity)
       }, 0)),
       totalPriceNumber: item.orderItems.reduce((total, item) => {
-        return total + Number(item.product.price)
+        return total + Number(item.product.price)*Number(item.quantity)
       }, 0)
     }));
 
