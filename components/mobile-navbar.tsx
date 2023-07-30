@@ -10,68 +10,65 @@ import { useParams, usePathname } from "next/navigation";
 import { SignOutButton } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 
-
 import { cn } from "@/lib/utils";
 import IconButton from "@/components/ui/icon-button";
 
-
 const MobileNavbar = () => {
+  const [open, setOpen] = useState(false);
 
-    const [open, setOpen] = useState(false);
-  
-    const onOpen = () => setOpen(true);
-    const onClose = () => setOpen(false);
-    const pathname = usePathname();
-    const params = useParams();
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(false);
+  const pathname = usePathname();
+  const params = useParams();
 
-    const routes = [
-        {
-          href: `/${params.storeId}`,
-          label: "Overview",
-          acitve: pathname === `/${params.storeId}`,
-        },
-        {
-          href: `/${params.storeId}/billboards`,
-          label: "Billboards",
-          acitve: pathname === `/${params.storeId}/billboards`,
-        },
-        {
-          href: `/${params.storeId}/categories`,
-          label: "Categories",
-          acitve: pathname === `/${params.storeId}/categories`,
-        },
-        {
-          href: `/${params.storeId}/sizes`,
-          label: "Sizes",
-          acitve: pathname === `/${params.storeId}/sizes`,
-        },
-        {
-          href: `/${params.storeId}/colors`,
-          label: "Colors",
-          acitve: pathname === `/${params.storeId}/colors`,
-        },
-        {
-          href: `/${params.storeId}/products`,
-          label: "Products",
-          acitve: pathname === `/${params.storeId}/products`,
-        },
-        {
-          href: `/${params.storeId}/orders`,
-          label: "Orders",
-          acitve: pathname === `/${params.storeId}/orders`,
-        },
-        {
-          href: `/${params.storeId}/settings`,
-          label: "Settings",
-          acitve: pathname === `/${params.storeId}/settings`,
-        },
-      ];
+  const routes = [
+    {
+      href: `/${params.storeId}`,
+      label: "Overview",
+      acitve: pathname === `/${params.storeId}`,
+    },
+    {
+      href: `/${params.storeId}/billboards`,
+      label: "Billboards",
+      acitve: pathname === `/${params.storeId}/billboards`,
+    },
+    {
+      href: `/${params.storeId}/categories`,
+      label: "Categories",
+      acitve: pathname === `/${params.storeId}/categories`,
+    },
+    {
+      href: `/${params.storeId}/sizes`,
+      label: "Sizes",
+      acitve: pathname === `/${params.storeId}/sizes`,
+    },
+    {
+      href: `/${params.storeId}/colors`,
+      label: "Colors",
+      acitve: pathname === `/${params.storeId}/colors`,
+    },
+    {
+      href: `/${params.storeId}/products`,
+      label: "Products",
+      acitve: pathname === `/${params.storeId}/products`,
+    },
+    {
+      href: `/${params.storeId}/orders`,
+      label: "Orders",
+      acitve: pathname === `/${params.storeId}/orders`,
+    },
+    {
+      href: `/${params.storeId}/settings`,
+      label: "Settings",
+      acitve: pathname === `/${params.storeId}/settings`,
+    },
+  ];
 
   return (
     <>
       <button
         onClick={onOpen}
-        className="flex items-center gap-x-2 lg:hidden text-black"
+        className="flex items-center gap-x-2 lg:hidden dark:text-white text-black"
       >
         {}
         <LuAlignRight size={24} />
@@ -123,7 +120,7 @@ const MobileNavbar = () => {
                     ))}
                   </div>
                   <div>
-                      <div                 
+                    <div
                       className="
                       mx-3 
                       flex
@@ -133,13 +130,13 @@ const MobileNavbar = () => {
                       gap-3                    
                       cursor-pointer
                       "
-                      >
-                        <div className="bg-black rounded-full hover:bg-neutral-400 px-4 py-1 text-white">
-                          <SignOutButton/>
-                       </div>
-                          <UserButton />
-                      </div>          
-                </div>
+                    >
+                      <div className="bg-black rounded-full hover:bg-neutral-400 px-4 py-1 text-white">
+                        <SignOutButton />
+                      </div>
+                      <UserButton />
+                    </div>
+                  </div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
