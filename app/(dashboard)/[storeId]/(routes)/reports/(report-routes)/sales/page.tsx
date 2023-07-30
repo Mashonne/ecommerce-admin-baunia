@@ -1,4 +1,6 @@
 import prismadb from "@/lib/prismadb";
+import { formatter } from "@/lib/utils";
+
 import ReportView from "./components/report-view";
 
 const data = [
@@ -22,14 +24,13 @@ const data = [
   },
 ]
 
-type OrderColumn = {
+export type OrderTable = {
   id: string;
+  name: string | null;
   phone: string,
   address: string,
-  isPaid: boolean,
   totalPrice: string,
   products: string,
-  createdAt: string;
 };
 
 const SalesReport = async ({
@@ -40,6 +41,7 @@ const SalesReport = async ({
     const orders = await prismadb.order.findMany({
       where: {
         storeId: params.storeId,
+        isPaid: true,
       },
       include: {
         orderItems: {
@@ -53,7 +55,16 @@ const SalesReport = async ({
       },
     });
 
-    
+    const formattedOrders: OrderTable[] = orders.map((item) => ({
+      id: item.id,
+      name: item.customerName,
+      phone: item.phone,
+      address: item.address,
+      products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
+      totalPrice: formatter.format(item.orderItems.reduce((total, item) => {
+        return total + Number(item.product.price)
+      }, 0)),
+    }));
 
     return ( 
       <div 
@@ -65,7 +76,7 @@ const SalesReport = async ({
             z-50
           "
       >     
-       <ReportView data={data}/>
+       <ReportView data={formattedOrders}/>
       </div>
      );
 }
