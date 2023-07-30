@@ -73,7 +73,7 @@ const Report: React.FC<ReportProps> = ({ data }) => (
             <Text style={styles.tableCellHeader}>Total Value</Text>
           </View>
         </View>
-
+        {data.length === 0 && <Text>No data.</Text>}
         {data.map((item) => (
           <View key={item.id} style={styles.tableRow}>
             <View style={styles.tableCol}>
