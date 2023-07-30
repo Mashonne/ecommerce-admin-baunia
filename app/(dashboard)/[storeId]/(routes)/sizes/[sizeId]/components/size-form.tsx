@@ -36,9 +36,7 @@ type SizeFormValues = z.infer<typeof formSchema>;
 interface SizeFormProps {
   initialData: Size | null;
 }
-export const SizeForm: React.FC<SizeFormProps> = ({
-  initialData,
-}) => {
+export const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
 
@@ -47,9 +45,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
 
   const title = initialData ? "Edit size" : "Create size";
   const description = initialData ? "Edit a size." : "Add a new size";
-  const toastMessage = initialData
-    ? "Size updated."
-    : "Size created.";
+  const toastMessage = initialData ? "Size updated." : "Size created.";
   const action = initialData ? "Save changes" : "Create";
 
   const form = useForm<SizeFormValues>({
@@ -84,16 +80,12 @@ export const SizeForm: React.FC<SizeFormProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/sizes/${params.sizeId}` 
-      );
+      await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
       router.refresh();
       router.push(`/${params.storeId}/sizes`);
       toast.success("Size deleted.");
     } catch (error: any) {
-      toast.error(
-        "Make sure you removed all products using this size first."
-      );
+      toast.error("Make sure you removed all products using this size first.");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -126,8 +118,8 @@ export const SizeForm: React.FC<SizeFormProps> = ({
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
-        >     
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <FormField
               control={form.control}
               name="name"
