@@ -59,7 +59,7 @@ export async function POST(req: Request) {
           id: product.productId,
         },
         data: {
-          isArchived: true,
+          isArchived: product.quantity < 1,
           quantity: {
             decrement: product.quantity,
           },
