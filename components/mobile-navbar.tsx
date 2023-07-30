@@ -131,7 +131,7 @@ const MobileNavbar = () => {
                       cursor-pointer
                       "
                     >
-                      <div className="bg-black dark:bg-white dark:slate-950 rounded-full hover:bg-neutral-400 px-4 py-1 text-white">
+                      <div className="bg-black dark:bg-white dark:text-slate-950 rounded-full hover:bg-neutral-400 px-4 py-1 text-white">
                         <SignOutButton />
                       </div>
                       <UserButton />
