@@ -15,6 +15,11 @@ export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders });
 }
 
+interface Product {
+  id: string;
+  cartQuantity: number;
+}
+
 export async function POST(
   req: Request,
   { params }: { params: { storeId: string } }
@@ -36,13 +41,12 @@ export async function POST(
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   products.forEach((product) => {
-    const productDetails = items.find(
-      (item: { productId: string; cartQuantity: number }) =>
-        item.productId === product.id
+    const productDetails: Product = items.find(
+      (item: Product) => item.id === product.id
     );
 
     line_items.push({
-      quantity: productDetails?.cartQuantity,
+      quantity: productDetails?.cartQuantity | 1,
       price_data: {
         currency: "USD",
         product_data: {
