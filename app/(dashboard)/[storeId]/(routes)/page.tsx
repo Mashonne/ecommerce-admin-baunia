@@ -10,6 +10,7 @@ import { getSalesCount } from "@/actions/get-sales-count";
 import { getStockCount } from "@/actions/get-stock-count";
 import { Overview } from "@/components/overview";
 import { getGraphRevenue } from "@/actions/get-graph-revenue";
+import OverviewHeading from "./(overview)/components/overview-heading";
 
 interface DashboardProps {
   params: { storeId: string };
@@ -24,9 +25,9 @@ const DashboradPage: React.FC<DashboardProps> = async ({ params }) => {
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <Heading title="Dashboard" description="Over view of your store" />
+        <OverviewHeading storeId={params.storeId}/>
         <Separator />
-        <div className="grid gap-4 grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
           <Card>
             <CardHeader className="flex flex-row items-center justify-center space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -72,8 +73,7 @@ const DashboradPage: React.FC<DashboardProps> = async ({ params }) => {
             <CardTitle>Overview</CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
-              <Overview data={graphRevenue
-              }/>
+              <Overview data={graphRevenue}/>
           </CardContent>
         </Card>
       </div>

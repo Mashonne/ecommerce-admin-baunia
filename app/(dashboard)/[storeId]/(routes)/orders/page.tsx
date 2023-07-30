@@ -7,7 +7,11 @@ import { OrderColumn } from "./components/columns";
 import { formatter } from "@/lib/utils";
 import { format } from "date-fns";
 
-const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
+const OrdersPage = async ({ 
+  params 
+}: { 
+  params: { storeId: string } 
+}) => {
   const orders = await prismadb.order.findMany({
     where: {
       storeId: params.storeId,
@@ -16,7 +20,7 @@ const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
       orderItems: {
         include: {
           product: true
-        }
+        } 
       }
     },
     orderBy: {
@@ -26,6 +30,7 @@ const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
 
   const formattedOrders: OrderColumn[] = orders.map((item) => ({
     id: item.id,
+    name: item.customerName,
     phone: item.phone,
     address: item.address,
     products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
