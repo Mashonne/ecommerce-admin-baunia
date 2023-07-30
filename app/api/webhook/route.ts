@@ -54,17 +54,24 @@ export async function POST(req: Request) {
     const products = order.orderItems.map((orderItem) => orderItem);
 
     for (const product of products) {
-      await prismadb.product.update({
+      const currentProduct = await prismadb.product.findUnique({
         where: {
           id: product.productId,
         },
-        data: {
-          isArchived: product.quantity < 2,
-          quantity: {
-            decrement: product.quantity,
-          },
-        },
       });
+      if (currentProduct) {
+        await prismadb.product.update({
+          where: {
+            id: product.productId,
+          },
+          data: {
+            isArchived: currentProduct?.quantity < 2,
+            quantity: {
+              decrement: product.quantity,
+            },
+          },
+        });
+      }
     }
   }
 
