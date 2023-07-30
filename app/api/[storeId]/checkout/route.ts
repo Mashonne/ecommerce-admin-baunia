@@ -46,7 +46,7 @@ export async function POST(
     );
 
     line_items.push({
-      quantity: productDetails?.cartQuantity | 1,
+      quantity: productDetails?.cartQuantity,
       price_data: {
         currency: "USD",
         product_data: {
