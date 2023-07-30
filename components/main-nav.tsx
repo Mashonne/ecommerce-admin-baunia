@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import MobileNavbar from "@/components/mobile-navbar";
 
 export function MainNav({
   className,
@@ -55,7 +56,9 @@ export function MainNav({
     },
   ];
   return (
-    <nav className={cn("flex items-center space-x-4 lg:space-x-6", className)}>
+   <>
+    <MobileNavbar />
+    <nav className={cn("hidden lg:flex items-center space-x-4 lg:space-x-6", className)}>
       {routes.map((route) => (
         <Link
           key={route.href}
@@ -71,5 +74,6 @@ export function MainNav({
         </Link>
       ))}
     </nav>
+   </>
   );
 }

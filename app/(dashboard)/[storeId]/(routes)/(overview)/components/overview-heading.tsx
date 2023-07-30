@@ -14,9 +14,9 @@ const OverviewHeading: React.FC<OverviewHeadingProps> = ({
    storeId
 }) => {
     return ( 
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between gap-4 items-left md:items-center">
              <Heading title="Dashboard" description="Over view of your store" />
-             <div className="flex gap-2">
+             <div className="flex flex-col sm:flex-row gap-2">
                 <GenerateButton 
                   icon={BiBarChartSquare} 
                   path="sales" 
