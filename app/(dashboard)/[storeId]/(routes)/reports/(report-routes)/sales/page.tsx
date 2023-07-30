@@ -3,27 +3,6 @@ import { formatter } from "@/lib/utils";
 
 import ReportView from "./components/report-view";
 
-const data = [
-  {
-    no: 1,
-    name: "Sam",
-    email: "himash@gmail.com",
-    total: "$200",
-  },
-  {
-    no: 2,
-    name: "Sam",
-    email: "himash@gmail.com",
-    total: "$200",
-  },
-  {
-    no: 3,
-    name: "Sam",
-    email: "himash@gmail.com",
-    total: "$200",
-  },
-]
-
 export type OrderTable = {
   id: string;
   name: string | null;
